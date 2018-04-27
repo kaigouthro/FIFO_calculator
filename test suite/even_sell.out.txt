@@ -1,0 +1,9 @@
+Nishaads-MacBook-Pro:test suite nknavkal$ python fifo.py even_sell.csv
+Portfolio (2 assets)
+ETH: 10.0 $6150.0
+BTC: 1.0 $11250.0
+Total portfolio value: $17400.0
+Portfolio P&L (2 assets) :
+ETH: $300.0
+BTC: $0
+Total P&L: $300.0

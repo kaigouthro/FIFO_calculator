@@ -1,0 +1,7 @@
+Nishaads-MacBook-Pro:test suite nknavkal$ python fifo.py error_neg_price.csv
+Traceback (most recent call last):
+  File "fifo.py", line 88, in <module>
+    catchErrors(line)
+  File "fifo.py", line 72, in catchErrors
+    assert price >=0,"Assets cannot have negative prices" #tested
+AssertionError: Assets cannot have negative prices

@@ -1,0 +1,8 @@
+Nishaads-MacBook-Pro:test suite nknavkal$ python fifo.py error_incompatible_data.csv
+incompatible datatypes: must be Date, String, Float, Float
+Traceback (most recent call last):
+  File "fifo.py", line 95, in <module>
+    processOrder(line[1], theOrder)
+  File "fifo.py", line 42, in processOrder
+    orderQuantity = float(order[0])
+ValueError: could not convert string to float: 'H'

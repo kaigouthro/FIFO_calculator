@@ -1,0 +1,7 @@
+Nishaads-MacBook-Pro:test suite nknavkal$ python fifo.py error_shortsell.csv
+Traceback (most recent call last):
+  File "fifo.py", line 88, in <module>
+    catchErrors(line)
+  File "fifo.py", line 74, in catchErrors
+    assert asset in quantity.keys(),"detected sale before purchase (short selling is not supported)" #tested
+AssertionError: detected sale before purchase (short selling is not supported)
