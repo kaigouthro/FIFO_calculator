@@ -35,11 +35,11 @@ class CryptoDeque:
 def processOrder(token, order):
     q = assets[token] #this is the dequeue
     orderQuantity = float(order[0])
-    orderPrice = float(order[1])
     if orderQuantity > 0:
         q.addFront(order) #purchase
         quantity[token] += orderQuantity
     else: #sell
+        orderPrice = float(order[1])
         batch = q.removeRear(orderPrice) #sell all of the asset bought at the oldest price
         batchQuantity = float(batch[0])
         batchPrice = float(batch[1])
@@ -53,11 +53,11 @@ def processOrder(token, order):
 def catchErrors(line):
     try:
         date = line[0]
-        asset = line[1]
         price = float(line[2])
         amount = float(line[3])
         assert price >=0,"Assets cannot have negative prices" #tested
         if amount < 0:
+            asset = line[1]
             assert asset in quantity.keys(),"detected sale before purchase (short selling is not supported)" #tested
             assert abs(amount) <= quantity[asset],"sell amount exceeds supply" #tested
     except ValueError as err:
@@ -80,15 +80,15 @@ for line in reader:
         processOrder(line[1], theOrder)
 
 
-print("Portfolio (" + str(len(assets.keys())) + " assets)")
+print(f"Portfolio ({len(assets.keys())} assets)")
 #print ("assets")
-for asset in assets.keys():
+for asset in assets:
     value[asset] = quantity[asset] * assets[asset].price
     portfolioValue += value[asset]
-    print(asset + ": " + str(quantity[asset]) + " $" + str(value[asset]))
-print("Total portfolio value: $" + str(portfolioValue))
-print("Portfolio P&L (" + str(len(assets.keys())) + " assets) :")
-for asset in assets:
-    grossProfit += assets[asset].profits
-    print(asset + ": $" + str(assets[asset].profits))
-print("Total P&L: $" + str(grossProfit))
+    print(f"{asset}: {str(quantity[asset])} ${str(value[asset])}")
+print(f"Total portfolio value: ${str(portfolioValue)}")
+print(f"Portfolio P&L ({len(assets.keys())} assets) :")
+for asset, value_ in assets.items():
+    grossProfit += value_.profits
+    print(f"{asset}: ${str(assets[asset].profits)}")
+print(f"Total P&L: ${str(grossProfit)}")
